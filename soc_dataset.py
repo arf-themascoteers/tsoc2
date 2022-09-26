@@ -12,7 +12,7 @@ from sklearn import model_selection
 class SOCDataset(Dataset):
     def __init__(self, is_train=True):
         self.is_train = is_train
-        self.csv_file_location = "data/ml.csv"
+        self.csv_file_location = "data/trimmed.csv"
         self.work_csv_file_location = "data/work.csv"
         self.scaler = None
         self.df = pd.read_csv(self.csv_file_location)
@@ -33,7 +33,7 @@ class SOCDataset(Dataset):
         self.scaler = MinMaxScaler()
         x_scaled = self.scaler.fit_transform(x)
         df["soc"] = x_scaled
-        for col in df.columns[5:]:
+        for col in df.columns[4:]:
             df = self.__scale_col__(df, col)
         return df
 
@@ -56,7 +56,7 @@ class SOCDataset(Dataset):
     def __getitem__(self, idx):
         row = self.df.iloc[idx]
         soc = row["soc"]
-        x = list(row[6:])
+        x = list(row[4:])
         return torch.tensor(x, dtype=torch.float32), torch.tensor(soc, dtype=torch.float32)
 
 

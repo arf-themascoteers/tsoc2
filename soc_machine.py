@@ -9,10 +9,7 @@ class SOCMachine(nn.Module):
     def __init__(self):
         super().__init__()
         self.band_net = nn.Sequential(
-            nn.Linear(6, 10),
-            nn.ReLU(),
-            nn.Linear(10, 1),
-            nn.Sigmoid()
+            nn.Linear(8, 1)
         )
 
     def forward(self, x):
